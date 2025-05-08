@@ -2,23 +2,28 @@ import tkinter as tk
 from tkinter import ttk
 
 root = tk.Tk()
-root.geometry("800x600")
-root.resizable(False, False)  # Disable window resizing
+root.resizable(False, False)
+root.title("Damage Cheat Sheet")
 
 firstPanedWindow = ttk.PanedWindow(root, orient=tk.HORIZONTAL)
 firstPanedWindow.pack(fill=tk.BOTH, expand=True)
 
 frame1 = ttk.Frame(firstPanedWindow)
 frame2 = ttk.Frame(firstPanedWindow, relief=tk.SUNKEN)
+frmae3 = ttk.Frame(firstPanedWindow, relief=tk.SUNKEN)
 
-firstPanedWindow.add(frame1, weight=2)
-firstPanedWindow.add(frame2, weight=1)
+firstPanedWindow.add(frame1)
+firstPanedWindow.add(frame2)
+firstPanedWindow.add(frmae3)
 
 text_widget1 = tk.Text(frame1, wrap=tk.WORD, height=5, width=50, padx=7, bd=2, relief=tk.SUNKEN)
 text_widget1.grid(row=0, column=0, columnspan=3, padx=5, pady=5, sticky="nsew")
 
 text_widget2 = tk.Text(frame2, wrap=tk.WORD, height=5, width=50, padx=7, bd=2, relief=tk.SUNKEN)
 text_widget2.grid(row=0, column=0, columnspan=3, padx=5, pady=5, sticky="nsew")
+
+text_widget3 = tk.Text(frmae3, wrap=tk.WORD, height=5, width=50, padx=7, bd=2, relief=tk.SUNKEN)
+text_widget3.grid(row=0, column=0, columnspan=3, padx=5, pady=5, sticky="nsew")
 
 def format_text(text):
     text_widget1.config(state=tk.NORMAL)
@@ -47,12 +52,28 @@ def format_text2(text):
             text_widget2.insert(tk.END, part)
         text_widget2.insert(tk.END, '\n')
     text_widget2.config(state=tk.DISABLED)
+def format_text3(text):
+    text_widget3.config(state=tk.NORMAL)
+    text_widget3.delete(1.0, tk.END)
+    parts = text.split('\n')
+    for part in parts:
+        if "+50% Damage" in part:
+            text_widget3.insert(tk.END, part, 'green_bold')
+        elif "-50% Damage:" in part:
+            text_widget3.insert(tk.END, part, 'red_bold')
+        else:
+            text_widget3.insert(tk.END, part)
+        text_widget3.insert(tk.END, '\n')
+    text_widget3.config(state=tk.DISABLED)
 
 text_widget1.tag_configure('green_bold', foreground='green', font=('Helvetica', 8, 'bold'))
 text_widget1.tag_configure('red_bold', foreground='red', font=('Helvetica', 8, 'bold'))
 
 text_widget2.tag_configure('green_bold', foreground='green', font=('Helvetica', 8, 'bold'))
 text_widget2.tag_configure('red_bold', foreground='red', font=('Helvetica', 8, 'bold'))
+
+text_widget3.tag_configure('green_bold', foreground='green', font=('Helvetica', 8, 'bold'))
+text_widget3.tag_configure('red_bold', foreground='red', font=('Helvetica', 8, 'bold'))
 
 ##__Creating the buttons__##
 def grineer():
@@ -146,5 +167,67 @@ puncture_button.grid(row=1, column=1, padx=1, pady=1, sticky="nw")
 
 slash_button = ttk.Button(frame2, text="Slash", command=slash)
 slash_button.grid(row=1, column=2, padx=1, pady=1, sticky="nw")
+
+
+##_Adding the buttons to the third frame_##
+def toxin():
+    format_text3("+50% Damage: \nNarmer")
+
+def cold():
+    format_text3("+50% Damage:\nSentient\n-50% Damage:\nTechrot")
+
+def heat():
+    format_text3("+50% Damage:\nInfested\n-50% Damage:\nKuva Grineer")
+
+def electric():
+    format_text3("+50% Damage:\nCorpus Amalgam + The Murmur")
+
+def viral():
+    format_text3("+50% Damage:\nOrokin\n-50% Damage:\nDeimos Infested + The Murmur")
+
+def gas():
+    format_text3("+50% Damage:\nDeimos Infested + Techrot\n-50% Damage:\nScaldra")
+
+def corrsv():
+    format_text3("+50% Damage:\nGrineer + Kuva Grineer + Scaldra\n-50% Damage:\nSentient")
+
+def blast():
+    format_text3("+50% Damage:\nDeimos Infested\n-50% Damage:\nCorpus Amalgam")
+
+def magn():
+    format_text3("+50% Damage:\nCorpus + Corpus Amalgam\n-50% Damage:\nNarmer")
+
+def radi():
+    format_text3("+50% Damage:\nSentient + The Murmur\n-50% Damage:\nOrokin")
+
+toxin_button = ttk.Button(frmae3, text="Toxin", command=toxin)
+toxin_button.grid(row=1, column=0, padx=1, pady=1, sticky="nw")
+
+cold_button = ttk.Button(frmae3, text="Cold", command=cold)
+cold_button.grid(row=1, column=1, padx=1, pady=1, sticky="nw")
+
+heat_button = ttk.Button(frmae3, text="Heat", command=heat)
+heat_button.grid(row=1, column=2, padx=1, pady=1, sticky="nw")
+
+electric_button = ttk.Button(frmae3, text="Electric", command=electric)
+electric_button.grid(row=2, column=0, padx=1, pady=1, sticky="nw")
+
+viral_button = ttk.Button(frmae3, text="Viral", command=viral)
+viral_button.grid(row=2, column=1, padx=1, pady=1, sticky="nw")
+
+gas_button = ttk.Button(frmae3, text="Gas", command=gas)
+gas_button.grid(row=2, column=2, padx=1, pady=1, sticky="nw")
+
+corrsv_button = ttk.Button(frmae3, text="Corrosive", command=corrsv)
+corrsv_button.grid(row=3, column=0, padx=1, pady=1, sticky="nw")
+
+blast_button = ttk.Button(frmae3, text="Blast", command=blast)
+blast_button.grid(row=3, column=1, padx=1, pady=1, sticky="nw")
+
+magn_button = ttk.Button(frmae3, text="Magnetic", command=magn)
+magn_button.grid(row=3, column=2, padx=1, pady=1, sticky="nw")
+
+radi_button = ttk.Button(frmae3, text="Radiation", command=radi)
+radi_button.grid(row=4, column=0, padx=1, pady=1, sticky="nw")
 
 root.mainloop()

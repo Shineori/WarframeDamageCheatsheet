@@ -1,0 +1,4 @@
+([('DMGnSTAT',
+   '/Users/shineori/Library/Mobile Documents/com~apple~CloudDocs/Coding '
+   'Projects/damageCheatSheet/dist/DMGnSTAT',
+   'EXECUTABLE')],)
